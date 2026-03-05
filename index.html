@@ -115,6 +115,15 @@ button {
     color: black;
 }
 
+    .tamanho1 .nome {
+    font-size: 13px;
+}
+
+.tamanho1 .valor {
+    font-size: 18px; /* Aumenta aqui */
+    font-weight: bold;
+}
+    
 /* TAMANHO 2 */
 .tamanho2 {
     width: 20cm;
@@ -205,8 +214,8 @@ function adicionarEtiqueta() {
 
         if (tamanho === "tamanho1") {
             etiqueta.innerHTML = `
-                <span><strong>${nome}</strong></span>
-                <span><strong>R$ ${valor}</strong></span>
+                <span class="nome">${nome}</span>
+                <span class="valor">R$ ${valor}</span>
             `;
         }
 
@@ -228,4 +237,5 @@ function adicionarEtiqueta() {
 </script>
 
 </body>
+
 </html>

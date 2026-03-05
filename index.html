@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Viva Art - Sistema de Etiquetas</title>
+
+<style>
+
+:root {
+    --rosa: #d94f9d;
+    --verde: #19c2b3;
+    --preto: #000000;
+    --fundo: #f4f6f8;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--fundo);
+    margin: 0;
+    text-align: center;
+}
+
+/* HEADER */
+header {
+    background: white;
+    padding: 20px;
+    border-bottom: 4px solid var(--rosa);
+}
+
+header h1 {
+    color: var(--rosa);
+    margin: 0;
+    font-size: 26px;
+}
+
+header span {
+    color: var(--verde);
+    font-size: 14px;
+    letter-spacing: 3px;
+}
+
+/* FORM */
+.container {
+    padding: 20px;
+}
+
+input, select {
+    padding: 10px;
+    margin: 6px;
+    border-radius: 8px;
+    border: 2px solid var(--rosa);
+    outline: none;
+}
+
+input:focus, select:focus {
+    border-color: var(--verde);
+}
+
+/* BOTÕES */
+button {
+    padding: 10px 20px;
+    margin: 8px;
+    border-radius: 8px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-add {
+    background-color: var(--rosa);
+    color: white;
+}
+
+.btn-add:hover {
+    background-color: var(--verde);
+}
+
+.btn-print {
+    background-color: var(--verde);
+    color: white;
+}
+
+.btn-print:hover {
+    opacity: 0.85;
+}
+
+/* FOLHA */
+#folha {
+    width: 21cm;
+    min-height: 29.7cm;
+    margin: 20px auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    background: white;
+    padding: 10px;
+    box-shadow: 0px 0px 15px rgba(0,0,0,0.08);
+}
+
+/* ===================== */
+/* ETIQUETAS PRETAS */
+/* ===================== */
+
+/* TAMANHO 1 */
+.tamanho1 {
+    width: 10.5cm;
+    height: 1.46cm;
+    border: 1px solid black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 8px;
+    font-size: 13px;
+    color: black;
+}
+
+/* TAMANHO 2 */
+.tamanho2 {
+    width: 20cm;
+    height: 9.15cm;
+    border: 3px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 8px auto;
+    color: black;
+}
+
+.tamanho2 h1 {
+    font-size: 40px;
+    margin: 0;
+}
+
+.tamanho2 .valor {
+    font-size: 60px;
+    font-weight: bold;
+}
+
+/* IMPRESSÃO */
+@media print {
+
+    body * {
+        visibility: hidden;
+    }
+
+    #folha, #folha * {
+        visibility: visible;
+    }
+
+    #folha {
+        position: absolute;
+        top: 0;
+        left: 0;
+        box-shadow: none;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Viva Art</h1>
+    <span>ARMARINHOS</span>
+</header>
+
+<div class="container">
+
+<input type="text" id="nome" placeholder="Nome do Produto">
+<input type="number" id="valor" placeholder="Valor">
+<input type="number" id="quantidade" placeholder="Qtd" value="1" min="1">
+
+<select id="tamanho">
+    <option value="tamanho1">Tamanho 1 (10,5 x 1,46 cm)</option>
+    <option value="tamanho2">Tamanho 2 Promocional (20 x 9,15 cm)</option>
+</select>
+
+<br>
+
+<button class="btn-add" onclick="adicionarEtiqueta()">Adicionar à Folha</button>
+<button class="btn-print" onclick="window.print()">Imprimir Folha</button>
+
+</div>
+
+<div id="folha"></div>
+
+<script>
+
+function adicionarEtiqueta() {
+
+    const nome = document.getElementById("nome").value;
+    const valor = parseFloat(document.getElementById("valor").value).toFixed(2);
+    const quantidade = parseInt(document.getElementById("quantidade").value);
+    const tamanho = document.getElementById("tamanho").value;
+
+    const folha = document.getElementById("folha");
+
+    for (let i = 0; i < quantidade; i++) {
+
+        const etiqueta = document.createElement("div");
+        etiqueta.classList.add(tamanho);
+
+        if (tamanho === "tamanho1") {
+            etiqueta.innerHTML = `
+                <span><strong>${nome}</strong></span>
+                <span><strong>R$ ${valor}</strong></span>
+            `;
+        }
+
+        if (tamanho === "tamanho2") {
+            etiqueta.innerHTML = `
+                <h1>${nome}</h1>
+                <div class="valor">R$ ${valor}</div>
+            `;
+        }
+
+        folha.appendChild(etiqueta);
+    }
+
+    document.getElementById("nome").value = "";
+    document.getElementById("valor").value = "";
+    document.getElementById("quantidade").value = 1;
+}
+
+</script>
+
+</body>
+</html>

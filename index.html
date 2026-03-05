@@ -9,9 +9,12 @@
 :root {
     --rosa: #d94f9d;
     --verde: #19c2b3;
-    --preto: #000000;
     --fundo: #f4f6f8;
 }
+
+/* ======================= */
+/* ESTILO GERAL */
+/* ======================= */
 
 body {
     font-family: 'Segoe UI', sans-serif;
@@ -20,7 +23,6 @@ body {
     text-align: center;
 }
 
-/* HEADER */
 header {
     background: white;
     padding: 20px;
@@ -39,7 +41,10 @@ header span {
     letter-spacing: 3px;
 }
 
-/* FORM */
+/* ======================= */
+/* FORMULÁRIO */
+/* ======================= */
+
 .container {
     padding: 20px;
 }
@@ -56,7 +61,6 @@ input:focus, select:focus {
     border-color: var(--verde);
 }
 
-/* BOTÕES */
 button {
     padding: 10px 20px;
     margin: 8px;
@@ -85,7 +89,10 @@ button {
     opacity: 0.85;
 }
 
-/* FOLHA */
+/* ======================= */
+/* FOLHA A4 */
+/* ======================= */
+
 #folha {
     width: 21cm;
     min-height: 29.7cm;
@@ -98,11 +105,10 @@ button {
     box-shadow: 0px 0px 15px rgba(0,0,0,0.08);
 }
 
-/* ===================== */
-/* ETIQUETAS PRETAS */
-/* ===================== */
+/* ======================= */
+/* ETIQUETA TAMANHO 1 */
+/* ======================= */
 
-/* TAMANHO 1 */
 .tamanho1 {
     width: 10.5cm;
     height: 1.46cm;
@@ -114,16 +120,20 @@ button {
     color: black;
 }
 
-    .tamanho1 .nome {
+.tamanho1 .nome {
     font-size: 13px;
 }
 
 .tamanho1 .valor {
-    font-size: 18px; /* Aumenta aqui */
+    font-size: 20px;
     font-weight: bold;
+    letter-spacing: 1px;
 }
-    
-/* TAMANHO 2 */
+
+/* ======================= */
+/* ETIQUETA TAMANHO 2 */
+/* ======================= */
+
 .tamanho2 {
     width: 20cm;
     height: 9.15cm;
@@ -146,9 +156,11 @@ button {
     font-weight: bold;
 }
 
+/* ======================= */
 /* IMPRESSÃO */
-@media print {
+/* ======================= */
 
+@media print {
     body * {
         visibility: hidden;
     }
@@ -199,11 +211,17 @@ button {
 
 function adicionarEtiqueta() {
 
-    const nome = document.getElementById("nome").value;
-    const valor = parseFloat(document.getElementById("valor").value).toFixed(2);
+    const nome = document.getElementById("nome").value.trim();
+    const valorInput = document.getElementById("valor").value;
     const quantidade = parseInt(document.getElementById("quantidade").value);
     const tamanho = document.getElementById("tamanho").value;
 
+    if (!nome || !valorInput || !quantidade) {
+        alert("Preencha todos os campos corretamente!");
+        return;
+    }
+
+    const valor = parseFloat(valorInput).toFixed(2);
     const folha = document.getElementById("folha");
 
     for (let i = 0; i < quantidade; i++) {
@@ -228,6 +246,7 @@ function adicionarEtiqueta() {
         folha.appendChild(etiqueta);
     }
 
+    // limpa campos
     document.getElementById("nome").value = "";
     document.getElementById("valor").value = "";
     document.getElementById("quantidade").value = 1;
@@ -236,6 +255,4 @@ function adicionarEtiqueta() {
 </script>
 
 </body>
-
 </html>
-

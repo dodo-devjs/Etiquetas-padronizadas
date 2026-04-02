@@ -6,192 +6,172 @@
 
 <style>
 
-:root {
-    --rosa: #d94f9d;
-    --verde: #19c2b3;
-    --fundo: #f4f6f8;
+:root{
+--rosa:#d94f9d;
+--verde:#19c2b3;
+--fundo:#f4f6f8;
 }
 
-/* ======================= */
-/* ESTILO GERAL */
-/* ======================= */
-
-body {
-    font-family: 'Segoe UI', sans-serif;
-    background-color: var(--fundo);
-    margin: 0;
-    text-align: center;
+body{
+font-family:'Segoe UI',sans-serif;
+background:var(--fundo);
+margin:0;
+text-align:center;
 }
 
-header {
-    background: white;
-    padding: 20px;
-    border-bottom: 4px solid var(--rosa);
+header{
+background:white;
+padding:20px;
+border-bottom:4px solid var(--rosa);
 }
 
-header h1 {
-    color: var(--rosa);
-    margin: 0;
-    font-size: 26px;
+header h1{
+color:var(--rosa);
+margin:0;
 }
 
-header span {
-    color: var(--verde);
-    font-size: 14px;
-    letter-spacing: 3px;
+header span{
+color:var(--verde);
+letter-spacing:3px;
 }
 
-/* ======================= */
-/* FORMULÁRIO */
-/* ======================= */
+/* FORM */
 
-.container {
-    padding: 20px;
+.container{
+padding:20px;
 }
 
-input, select {
-    padding: 10px;
-    margin: 6px;
-    border-radius: 8px;
-    border: 2px solid var(--rosa);
-    outline: none;
+input,select{
+padding:10px;
+margin:6px;
+border-radius:8px;
+border:2px solid var(--rosa);
 }
 
-input:focus, select:focus {
-    border-color: var(--verde);
+input:focus,select:focus{
+border-color:var(--verde);
 }
 
-button {
-    padding: 10px 20px;
-    margin: 8px;
-    border-radius: 8px;
-    border: none;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
+button{
+padding:10px 18px;
+margin:6px;
+border:none;
+border-radius:8px;
+font-weight:bold;
+cursor:pointer;
 }
 
-.btn-add {
-    background-color: var(--rosa);
-    color: white;
+.btn-add{
+background:var(--rosa);
+color:white;
 }
 
-.btn-add:hover {
-    background-color: var(--verde);
+.btn-print{
+background:var(--verde);
+color:white;
 }
 
-.btn-print {
-    background-color: var(--verde);
-    color: white;
+/* FOLHA */
+
+#folha{
+width:21cm;
+min-height:29.7cm;
+margin:20px auto;
+display:flex;
+flex-wrap:wrap;
+align-content:flex-start;
+background:white;
+padding:10px;
+box-shadow:0 0 15px rgba(0,0,0,0.08);
 }
 
-.btn-print:hover {
-    opacity: 0.85;
-}
-    
- .acoes {
-    position: absolute;
-    top: 2px;
-    right: 2px;
+/* ETIQUETA BASE */
+
+.etiqueta{
+position:relative;
 }
 
-.acoes button {
-    font-size: 10px;
-    margin-left: 2px;
-    cursor: pointer;
+/* TAMANHO 1 */
+
+.tamanho1{
+width:10.5cm;
+height:1.46cm;
+border:1px solid black;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:0 8px;
 }
 
-/* ======================= */
-/* FOLHA A4 */
-/* ======================= */
-
-#folha {
-    width: 21cm;
-    min-height: 29.7cm;
-    margin: 20px auto;
-    display: flex;
-    flex-wrap: wrap;
-    align-content: flex-start;
-    background: white;
-    padding: 10px;
-    box-shadow: 0px 0px 15px rgba(0,0,0,0.08);
+.tamanho1 .nome{
+font-size:13px;
 }
 
-/* ======================= */
-/* ETIQUETA TAMANHO 1 */
-/* ======================= */
-
-.tamanho1 {
-    width: 10.5cm;
-    height: 1.46cm;
-    border: 1px solid black;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 8px;
-    color: black;
+.tamanho1 .valor{
+font-size:20px;
+font-weight:bold;
 }
 
-.tamanho1 .nome {
-    font-size: 13px;
-}
+/* TAMANHO 2 */
 
-.tamanho1 .valor {
-    font-size: 20px;
-    font-weight: bold;
-    letter-spacing: 1px;
-}
-
-/* ======================= */
-/* ETIQUETA TAMANHO 2 */
-/* ======================= */
-
-.tamanho2 {
-    width: 20cm;
-    height: 9.15cm;
-    border: 3px solid black;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 8px auto;
-    color: black;
-}
-
-.tamanho2 h1 {
-    font-size: 40px;
-    margin: 0;
-}
-
-.tamanho2 .valor {
-    font-size: 60px;
-    font-weight: bold;
-}
-
-.tamanho1,
 .tamanho2{
-    position: relative;
+width:20cm;
+height:9.15cm;
+border:3px solid black;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+margin:8px auto;
 }
-    
-/* ======================= */
+
+.tamanho2 h1{
+font-size:40px;
+margin:0;
+}
+
+.tamanho2 .valor{
+font-size:60px;
+font-weight:bold;
+}
+
+/* BOTÕES */
+
+.acoes{
+position:absolute;
+top:2px;
+right:2px;
+}
+
+.acoes button{
+font-size:11px;
+padding:2px 5px;
+margin-left:2px;
+}
+
 /* IMPRESSÃO */
-/* ======================= */
 
-@media print {
-    body * {
-        visibility: hidden;
-    }
+@media print{
 
-    #folha, #folha * {
-        visibility: visible;
-    }
+body *{
+visibility:hidden;
+}
 
-    #folha {
-        position: absolute;
-        top: 0;
-        left: 0;
-        box-shadow: none;
-    }
+#folha,#folha *{
+visibility:visible;
+}
+
+#folha{
+position:absolute;
+top:0;
+left:0;
+box-shadow:none;
+}
+
+.acoes{
+display:none;
+}
+
 }
 
 </style>
@@ -200,25 +180,25 @@ button {
 <body>
 
 <header>
-    <h1>Viva Art</h1>
-    <span>ARMARINHOS</span>
+<h1>Viva Art</h1>
+<span>ARMARINHOS</span>
 </header>
 
 <div class="container">
 
 <input type="text" id="nome" placeholder="Nome do Produto">
 <input type="number" id="valor" placeholder="Valor">
-<input type="number" id="quantidade" placeholder="Qtd" value="1" min="1">
+<input type="number" id="quantidade" value="1" min="1">
 
 <select id="tamanho">
-    <option value="tamanho1">Tamanho 1 (10,5 x 1,46 cm)</option>
-    <option value="tamanho2">Tamanho 2 Promocional (20 x 9,15 cm)</option>
+<option value="tamanho1">Tamanho 1 (10,5 x 1,46 cm)</option>
+<option value="tamanho2">Tamanho 2 Promocional</option>
 </select>
 
 <br>
 
-<button class="btn-add" onclick="adicionarEtiqueta()">Adicionar à Folha</button>
-<button class="btn-print" onclick="window.print()">Imprimir Folha</button>
+<button class="btn-add" onclick="adicionarEtiqueta()">Adicionar</button>
+<button class="btn-print" onclick="window.print()">Imprimir</button>
 
 </div>
 
@@ -226,76 +206,95 @@ button {
 
 <script>
 
-function adicionarEtiqueta() {
+function adicionarEtiqueta(){
 
-    const nome = document.getElementById("nome").value.trim();
-    const valorInput = document.getElementById("valor").value;
-    const quantidade = parseInt(document.getElementById("quantidade").value);
-    const tamanho = document.getElementById("tamanho").value;
+const nome=document.getElementById("nome").value.trim();
+const valorInput=document.getElementById("valor").value;
+const quantidade=parseInt(document.getElementById("quantidade").value);
+const tamanho=document.getElementById("tamanho").value;
 
-    if (!nome || !valorInput || !quantidade) {
-        alert("Preencha todos os campos corretamente!");
-        return;
-    }
-
-    const valor = parseFloat(valorInput).toFixed(2);
-    const folha = document.getElementById("folha");
-
-    for (let i = 0; i < quantidade; i++) {
-
-        const etiqueta = document.createElement("div");
-        etiqueta.classList.add(tamanho);
-
-        if (tamanho === "tamanho1") {
-            etiqueta.innerHTML = `
-                <span class="nome">${nome}</span>
-                <span class="valor">R$ ${valor}</span>
-
-                <div class="acoes">
-                    <button onclick="editarEtiqueta(this)">✏️</button>
-                    <button onclick="excluirEtiqueta(this)">🗑️</button>
-                </div>
-            `;
-        }
-
-        if (tamanho === "tamanho2") {
-            etiqueta.innerHTML = `
-                <h1>${nome}</h1>
-                <div class="valor">R$ ${valor}</div>
-
-                <div class="acoes">
-                    <button onclick="editarEtiqueta(this)">✏️</button>
-                    <button onclick="excluirEtiqueta(this)">🗑️</button>
-                </div>
-            `;
-        }
-
-        folha.appendChild(etiqueta);
-    }
-
-    document.getElementById("nome").value = "";
-    document.getElementById("valor").value = "";
-    document.getElementById("quantidade").value = 1;
+if(!nome || !valorInput){
+alert("Preencha nome e valor");
+return;
 }
-    
- function excluirEtiqueta(botao) {
 
-    const etiqueta = botao.closest("div");
-    etiqueta.remove();
+const valor=parseFloat(valorInput).toFixed(2);
+const folha=document.getElementById("folha");
+
+for(let i=0;i<quantidade;i++){
+
+const etiqueta=document.createElement("div");
+etiqueta.classList.add("etiqueta");
+etiqueta.classList.add(tamanho);
+
+if(tamanho==="tamanho1"){
+
+etiqueta.innerHTML=`
+<span class="nome">${nome}</span>
+<span class="valor">R$ ${valor}</span>
+
+<div class="acoes">
+<button onclick="editarEtiqueta(this)">✏️</button>
+<button onclick="excluirEtiqueta(this)">🗑️</button>
+</div>
+`;
 
 }
-    
- function editarEtiqueta(botao) {
 
-    const etiqueta = botao.closest("div");
+if(tamanho==="tamanho2"){
 
-    const nome = etiqueta.querySelector(".nome, h1").innerText;
-    const valor = etiqueta.querySelector(".valor").innerText.replace("R$ ", "");
+etiqueta.innerHTML=`
+<h1>${nome}</h1>
+<div class="valor">R$ ${valor}</div>
 
-    document.getElementById("nome").value = nome;
-    document.getElementById("valor").value = valor;
+<div class="acoes">
+<button onclick="editarEtiqueta(this)">✏️</button>
+<button onclick="excluirEtiqueta(this)">🗑️</button>
+</div>
+`;
 
-    etiqueta.remove();
+}
+
+folha.appendChild(etiqueta);
+
+}
+
+document.getElementById("nome").value="";
+document.getElementById("valor").value="";
+document.getElementById("quantidade").value=1;
+
+}
+
+/* EXCLUIR */
+
+function excluirEtiqueta(botao){
+
+const etiqueta=botao.closest(".etiqueta");
+etiqueta.remove();
+
+}
+
+/* EDITAR */
+
+function editarEtiqueta(botao){
+
+const etiqueta=botao.closest(".etiqueta");
+
+let nome="";
+let valor="";
+
+if(etiqueta.querySelector(".nome")){
+nome=etiqueta.querySelector(".nome").innerText;
+}else{
+nome=etiqueta.querySelector("h1").innerText;
+}
+
+valor=etiqueta.querySelector(".valor").innerText.replace("R$ ","");
+
+document.getElementById("nome").value=nome;
+document.getElementById("valor").value=valor;
+
+etiqueta.remove();
 
 }
 

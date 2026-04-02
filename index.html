@@ -6,6 +6,24 @@
 
 <style>
 
+@page{
+size:A4;
+margin:0;
+}
+
+@media print{
+
+body{
+margin:0;
+padding:0;
+}
+
+#folha{
+margin:0;
+}
+
+}
+
 :root{
 --rosa:#d94f9d;
 --verde:#19c2b3;
@@ -65,40 +83,61 @@ background:var(--verde);
 color:white;
 }
 
+/* FOLHA A4 */
+
 #folha{
-width:21cm;
-min-height:29.7cm;
+width:210mm;
+height:297mm;
 margin:20px auto;
-display:flex;
-flex-wrap:wrap;
-align-content:flex-start;
+
+display:grid;
+grid-template-columns: 1fr 1fr;
+
+align-content:start;
+
 background:white;
+
 padding:10px;
-gap:4px;
-box-shadow:0 0 10px rgba(0,0,0,0.1);
+
+row-gap:2px;
+column-gap:4px;
 }
 
-/* ETIQUETA */
+/* ETIQUETA BASE */
 
 .etiqueta{
-position:relative;
 border:1px solid black;
 display:flex;
 align-items:center;
 justify-content:space-between;
-padding:0 6px;
+padding:0 4px;
+cursor:default;
 }
 
-/* TAMANHO 1 */
+/* ETIQUETA PEQUENA */
 
 .tamanho1{
-width:10.5cm;
-height:1.46cm;
+width:100%;
+height:1.5cm;
+
+display:flex;
+align-items:center;
+justify-content:space-between;
+
+box-sizing:border-box;
+
+padding:0 6px;
+
+border:1px solid black;
 }
 
 .tamanho1 .nome{
 font-size:20px;
 font-weight:bold;
+
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis;
 }
 
 .tamanho1 .valor{
@@ -106,7 +145,7 @@ font-size:26px;
 font-weight:bold;
 }
 
-/* TAMANHO 2 */
+/* ETIQUETA PROMOCIONAL */
 
 .tamanho2{
 width:20cm;
@@ -117,6 +156,7 @@ justify-content:center;
 
 .tamanho2 .nome{
 font-size:40px;
+font-weight:bold;
 }
 
 .tamanho2 .valor{
@@ -126,15 +166,20 @@ font-weight:bold;
 
 /* BOTÕES */
 
-.acoes{
-position:absolute;
-bottom:-18px;
-right:2px;
+.btn-editar,
+.btn-excluir{
+background:var(--verde);
+color:white;
+font-size:10px;
+padding:2px 4px;
+line-height:1;
 }
 
-.acoes button{
+.btn-duplicar{
+background:#555;
+color:white;
 font-size:11px;
-padding:2px 6px;
+padding:3px 6px;
 }
 
 /* IMPRESSÃO */
@@ -145,7 +190,7 @@ body *{
 visibility:hidden;
 }
 
-#folha, #folha *{
+#folha,#folha *{
 visibility:visible;
 }
 
@@ -156,7 +201,7 @@ left:0;
 box-shadow:none;
 }
 
-.acoes{
+button{
 display:none;
 }
 
@@ -197,6 +242,8 @@ display:none;
 
 <script>
 
+let etiquetaArrastando=null
+
 function adicionarEtiqueta(){
 
 const nome=document.getElementById("nome").value
@@ -207,36 +254,13 @@ const tamanho=document.getElementById("tamanho").value
 if(!nome || !valor){
 
 alert("Preencha nome e valor")
-
 return
 
 }
 
-const folha=document.getElementById("folha")
-
 for(let i=0;i<quantidade;i++){
 
-const etiqueta=document.createElement("div")
-
-etiqueta.className=`etiqueta ${tamanho}`
-
-etiqueta.innerHTML=`
-
-<span class="nome">${nome}</span>
-
-<span class="valor">R$ ${parseFloat(valor).toFixed(2)}</span>
-
-<div class="acoes">
-
-<button onclick="editarEtiqueta(this)">Editar</button>
-
-<button onclick="excluirEtiqueta(this)">Excluir</button>
-
-</div>
-
-`
-
-folha.appendChild(etiqueta)
+criarEtiqueta(nome,valor,tamanho)
 
 }
 
@@ -246,13 +270,37 @@ document.getElementById("quantidade").value=1
 
 }
 
+function criarEtiqueta(nome,valor,tamanho){
+
+const folha=document.getElementById("folha")
+
+const etiqueta=document.createElement("div")
+
+etiqueta.className=`etiqueta ${tamanho}`
+
+etiqueta.innerHTML=`
+
+<button class="btn-editar" onclick="editarEtiqueta(this)">✏</button>
+
+<span class="nome">${nome}</span>
+
+<span class="valor">R$ ${parseFloat(valor).toFixed(2)}</span>
+
+<button class="btn-duplicar" onclick="duplicarEtiqueta(this)">⧉</button>
+
+<button class="btn-excluir" onclick="excluirEtiqueta(this)">🗑</button>
+
+`
+
+folha.appendChild(etiqueta)
+
+}
+
 /* EXCLUIR */
 
 function excluirEtiqueta(botao){
 
-const etiqueta=botao.parentElement.parentElement
-
-etiqueta.remove()
+botao.closest(".etiqueta").remove()
 
 }
 
@@ -260,7 +308,7 @@ etiqueta.remove()
 
 function editarEtiqueta(botao){
 
-const etiqueta=botao.parentElement.parentElement
+const etiqueta=botao.closest(".etiqueta")
 
 const nome=etiqueta.querySelector(".nome").innerText
 
@@ -271,6 +319,22 @@ document.getElementById("nome").value=nome
 document.getElementById("valor").value=valor
 
 etiqueta.remove()
+
+}
+
+/* DUPLICAR */
+
+function duplicarEtiqueta(botao){
+
+const etiqueta=botao.closest(".etiqueta")
+
+const nome=etiqueta.querySelector(".nome").innerText
+
+const valor=etiqueta.querySelector(".valor").innerText.replace("R$ ","")
+
+const tamanho=etiqueta.classList.contains("tamanho1") ? "tamanho1":"tamanho2"
+
+criarEtiqueta(nome,valor,tamanho)
 
 }
 

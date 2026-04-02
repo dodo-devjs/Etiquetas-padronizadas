@@ -88,6 +88,18 @@ button {
 .btn-print:hover {
     opacity: 0.85;
 }
+    
+ .acoes {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+}
+
+.acoes button {
+    font-size: 10px;
+    margin-left: 2px;
+    cursor: pointer;
+}
 
 /* ======================= */
 /* FOLHA A4 */
@@ -156,6 +168,11 @@ button {
     font-weight: bold;
 }
 
+.tamanho1,
+.tamanho2{
+    position: relative;
+}
+    
 /* ======================= */
 /* IMPRESSÃO */
 /* ======================= */
@@ -233,6 +250,11 @@ function adicionarEtiqueta() {
             etiqueta.innerHTML = `
                 <span class="nome">${nome}</span>
                 <span class="valor">R$ ${valor}</span>
+
+                <div class="acoes">
+                    <button onclick="editarEtiqueta(this)">✏️</button>
+                    <button onclick="excluirEtiqueta(this)">🗑️</button>
+                </div>
             `;
         }
 
@@ -240,16 +262,41 @@ function adicionarEtiqueta() {
             etiqueta.innerHTML = `
                 <h1>${nome}</h1>
                 <div class="valor">R$ ${valor}</div>
+
+                <div class="acoes">
+                    <button onclick="editarEtiqueta(this)">✏️</button>
+                    <button onclick="excluirEtiqueta(this)">🗑️</button>
+                </div>
             `;
         }
 
         folha.appendChild(etiqueta);
     }
 
-    // limpa campos
     document.getElementById("nome").value = "";
     document.getElementById("valor").value = "";
     document.getElementById("quantidade").value = 1;
+}
+    
+ function excluirEtiqueta(botao) {
+
+    const etiqueta = botao.closest("div");
+    etiqueta.remove();
+
+}
+    
+ function editarEtiqueta(botao) {
+
+    const etiqueta = botao.closest("div");
+
+    const nome = etiqueta.querySelector(".nome, h1").innerText;
+    const valor = etiqueta.querySelector(".valor").innerText.replace("R$ ", "");
+
+    document.getElementById("nome").value = nome;
+    document.getElementById("valor").value = valor;
+
+    etiqueta.remove();
+
 }
 
 </script>
